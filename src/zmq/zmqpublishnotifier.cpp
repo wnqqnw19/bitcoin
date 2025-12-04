@@ -222,7 +222,7 @@ bool CZMQPublishHashBlockNotifier::NotifyBlock(const CBlockIndex *pindex)
     uint256 hash = pindex->GetBlockHash();
     LogDebug(BCLog::ZMQ, "Publish hashblock %s to %s\n", hash.GetHex(), this->address);
     uint8_t data[32];
-    for (unsigned int i = 0; i < 32; i++) {
+    for (unsigned int i = 0; i < 32; ++i) {
         data[31 - i] = hash.begin()[i];
     }
     return SendZmqMessage(MSG_HASHBLOCK, data, 32);
@@ -233,7 +233,7 @@ bool CZMQPublishHashTransactionNotifier::NotifyTransaction(const CTransaction &t
     uint256 hash = transaction.GetHash().ToUint256();
     LogDebug(BCLog::ZMQ, "Publish hashtx %s to %s\n", hash.GetHex(), this->address);
     uint8_t data[32];
-    for (unsigned int i = 0; i < 32; i++) {
+    for (unsigned int i = 0; i < 32; ++i) {
         data[31 - i] = hash.begin()[i];
     }
     return SendZmqMessage(MSG_HASHTX, data, 32);
